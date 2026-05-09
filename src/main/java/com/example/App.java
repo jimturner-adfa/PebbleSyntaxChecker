@@ -4,7 +4,9 @@ import io.pebbletemplates.pebble.PebbleEngine;
 import io.pebbletemplates.pebble.template.PebbleTemplate;
 import io.pebbletemplates.pebble.extension.escaper.SafeString;
 import io.pebbletemplates.pebble.lexer.Syntax;
+import io.pebbletemplates.pebble.loader.FileLoader; 
 import java.io.StringWriter;
+import java.io.FileWriter;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,23 +34,31 @@ public class App {
 		.setPrintOpenDelimiter("${{")  // Change from {{
 		.setPrintCloseDelimiter("}}")  // Keep or change closing delimiter
 		.build();
+	    // Note: FileLoader requires an absolute path or a specific base directory in 4.x
+	    FileLoader loader = new FileLoader("/home/yaturner/Documents/GitHub/DryRun");
+	    loader.setPrefix("/home/yaturner/Documents/GitHub/DryRun");
 	    PebbleEngine engine = new PebbleEngine.Builder()
 		.syntax(customSyntax)
+		.loader(loader)
 		.build();
 	    PebbleTemplate compiledTemplate = engine.getTemplate(templatePath);
 	    
 	    Map<String, Object> context = new HashMap<>();
 	    context.put("name", "Ubuntu User");
-	    // Open a FileWriter to the same path to overwrite the file
-            // Passing 'false' as the second argument ensures it overwrites
-            try (Writer fileWriter = new FileWriter(templatePath, false)) {
+	    
+	    // Open a FileWriter to write the file
+            try (Writer fileWriter = new FileWriter(outputPath, false)) {
                 compiledTemplate.evaluate(fileWriter, context);
-                System.out.println("Success: Output written back to " + templatePath);
+                System.out.println("Success: Output written to " + outputPath);
             }
+	    
+	    //Test output
 	    Writer writer = new StringWriter();
 	    compiledTemplate.evaluate(writer, context);
 	    
 	    System.out.println(writer.toString());
-	}
+	} catch (Exception e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 }
