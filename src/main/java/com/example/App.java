@@ -14,12 +14,13 @@ import java.util.Map;
 public class App {
     public static void main(String[] args) throws Exception {
 	// Validate that an argument was passed
-        if (args.length < 1) {
+        if (args.length < 2) {
             System.err.println("Usage: mvn exec:java -Dexec.args=\"templates/home.html\"");
             System.exit(1);
         }
 
-        String templatePath = args[0];
+	String prefix = args[0];
+        String templatePath = args[1];
 
 	// Calculate the output path by removing the .peb extension
         String outputPath = templatePath;
@@ -35,8 +36,8 @@ public class App {
 		.setPrintCloseDelimiter("}}")  // Keep or change closing delimiter
 		.build();
 	    // Note: FileLoader requires an absolute path or a specific base directory in 4.x
-	    FileLoader loader = new FileLoader("/home/yaturner/Documents/GitHub/DryRun");
-	    loader.setPrefix("/home/yaturner/Documents/GitHub/DryRun");
+	    FileLoader loader = new FileLoader(prefix);
+	    //// JMT loader.setPrefix("/home/yaturner/Documents/GitHub/DryRun");
 	    PebbleEngine engine = new PebbleEngine.Builder()
 		.syntax(customSyntax)
 		.loader(loader)
