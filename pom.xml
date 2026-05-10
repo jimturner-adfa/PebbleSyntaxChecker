@@ -35,7 +35,7 @@
 	    <appendAssemblyId>false</appendAssemblyId> <!-- Removes "-jar-with-dependencies" suffix -->
             <archive>
               <manifest>
-                <mainClass>com.example.App</mainClass>
+                <mainClass>com.example.DryRun</mainClass>
               </manifest>
             </archive>
             <descriptorRefs>
