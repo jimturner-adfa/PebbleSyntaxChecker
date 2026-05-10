@@ -62,14 +62,14 @@ public class App {
 	    context.put("CLASS_NAME","MainActivity");
 	    context.put("SAVE_LOCATION","/sdcard/CodeOnTheGoProjects/My Application");
 	    context.put("AGP_VERSION","8.14.3");
-	    context.put("KOTLIN_VERSION","17");
+	    context.put("KOTLIN_VERSION","1.9.22");
 	    context.put("GRADLE_VERSION","8.14.3");
 	    context.put("LANGUAGE","kotlin");
-	    context.put("COMPILE_SDK","21");
-	    context.put("MIN_SDK","17");
-	    context.put("TARGET_SDK","21");
-	    context.put("JAVA_SOURCE_COMPAT","17");
-	    context.put("JAVA_TARGET_COMPAT","17");
+	    context.put("COMPILE_SDK","36");
+	    context.put("MIN_SDK","21");
+	    context.put("TARGET_SDK","36");
+	    context.put("JAVA_SOURCE_COMPAT","JavaVersion.VERSION_17");
+	    context.put("JAVA_TARGET_COMPAT","JavaVersion.VERSION_17");
 	    context.put("JAVA_TARGET","17");
 	    
 	    // Open a FileWriter to write the file
