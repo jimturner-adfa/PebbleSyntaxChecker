@@ -53,6 +53,7 @@ public class DryRun {
 	    PebbleEngine engine = new PebbleEngine.Builder()
 		.syntax(customSyntax)
 		.loader(loader)
+		.strictVariables(true)
 		.build();
 	    PebbleTemplate compiledTemplate = engine.getTemplate(templatePath);
 	    
@@ -75,9 +76,11 @@ public class DryRun {
 	    // Open a FileWriter to write the file
             try (Writer fileWriter = new FileWriter(outputPath, false)) {
                 compiledTemplate.evaluate(fileWriter, context);
-                System.out.println("Success: Output written to " + outputPath);
+		System.out.println("Success: Output written to " + outputPath);
 		deletePeb();
-            }
+	    } catch (Exception e) {
+		System.err.println("Error: " + e.getMessage());
+	    }
 	    
 	    /* Test output DEBUGGING ONLY ****************
 	    Writer writer = new StringWriter();
@@ -85,7 +88,9 @@ public class DryRun {
 	    
 	    System.out.println(writer.toString());
 	    ************ DEBUGGING ONLY ******************/
-	} catch (Exception e) {
+	} catch (io.pebbletemplates.pebble.error.PebbleException e) {
+            System.err.println("Error: " + e.getMessage());	    
+	} catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
     }

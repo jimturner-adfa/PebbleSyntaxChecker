@@ -8,13 +8,13 @@ cp -r $DIR $CDIR
 pushd $CDIR
 FULL_PATH=$(realpath "$(pwd)")
 export PEBBLE_PREFIX="$FULL_PATH"
-find . -name "*.peb" -exec java -jar ~/.local/lib/DryRun.jar $(pwd) {} \;
+find . -name "*.peb" -exec java -jar /sdcard/Download/DryRun.jar $(pwd) {} \;
 if [[ $LANGUAGE == "java" ]]; then
     find . -name "*.kt" -exec rm {} \;
 else
     find . -name "*.java" -exec rm {} \;
 fi
 chmod a+x ./gradlew
-./gradlew assembleDebug --info
+sh ./gradlew -Pandroid.aapt2FromMavenOverride=/data/data/com.itsaky.androidide/files/home/android-sdk/build-tools/35.0.0/aapt2 assembleDebug
 popd
 
