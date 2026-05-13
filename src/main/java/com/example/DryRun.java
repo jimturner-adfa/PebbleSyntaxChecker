@@ -5,6 +5,10 @@ import io.pebbletemplates.pebble.template.PebbleTemplate;
 import io.pebbletemplates.pebble.extension.escaper.SafeString;
 import io.pebbletemplates.pebble.lexer.Syntax;
 import io.pebbletemplates.pebble.loader.FileLoader;
+import io.pebbletemplates.pebble.error.PebbleException;
+import io.pebbletemplates.pebble.error.ParserException;
+import io.pebbletemplates.pebble.error.LoaderException;
+import io.pebbletemplates.pebble.error.AttributeNotFoundException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,21 +95,29 @@ public class DryRun {
                 compiledTemplate.evaluate(fileWriter, context);
 		System.out.println("Success: Output written to " + outputPath);
 		deletePeb();
-	    } catch (Exception e) {
-		System.err.println("Error: " + e.getMessage());
+	    } catch (ParserException e) {
+		System.err.println("Parser Error: " + e.getMessage());
+		System.err.println("Line Number: " + e.getLineNumber());
+		System.exit(-1);
+	    } catch (PebbleException e) {
+		System.err.println("General Pebble Error: " + e.getMessage());
+		System.exit(-1);
 	    }
-	    
+
 	    /* Test output DEBUGGING ONLY ****************
 	    Writer writer = new StringWriter();
        	    compiledTemplate.evaluate(writer, context);
 	    
 	    System.out.println(writer.toString());
 	    ************ DEBUGGING ONLY ******************/
-	} catch (io.pebbletemplates.pebble.error.PebbleException e) {
-            System.err.println("Error: " + e.getMessage());	    
-	} catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
+	} catch (ParserException e) {
+            System.err.println("Parser Error: " + e.getMessage());
+            System.err.println("Line Number: " + e.getLineNumber());
+	    System.exit(-1);
+        } catch (PebbleException e) {
+            System.err.println("General Pebble Error: " + e.getMessage());
+	    System.exit(-1);
+	}
     }
 
     public static void deletePeb() {
@@ -122,7 +134,7 @@ public class DryRun {
 	} catch (IOException e) {
 	    System.err.println("Error during deleting file " + PathPeb.toString() + " : "
 			       + e.getMessage());
-	}
+	} 
     }
     
     public static void jsonParser(Map<String, Object> context) {
@@ -172,23 +184,23 @@ public class DryRun {
 			    }
 			    context.put(id, val);
 			}
-		    }
-		    
-		// 4. Iterate and process
-		/****************
-		for (int i = 0; i < userArray.length(); i++) {
-		    JSONObject user = userArray.getJSONObject(i);
-		    System.out.println("Parsing user index: " + i);
-		    // Example: String username = user.getString("username");
 		}
-                ****************/
 	    } else {
 		System.out.println("Key 'user' not found in JSON.");
+		System.exit(-1);
 	    }
 	    
-	} catch (Exception e) {
-	    System.err.println("Error reading or parsing the file: " + e.getMessage());
-	    e.printStackTrace();
+	} catch (ParserException e) {
+            System.err.println("Parser Error: " + e.getMessage());
+            System.err.println("Line Number: " + e.getLineNumber());
+	    System.exit(-1);
+            
+        } catch (PebbleException e) {
+            System.err.println("General Pebble Error: " + e.getMessage());
+	    System.exit(-1);
+        } catch (IOException e) {
+	    System.err.println("An I/O error occurred: " + e.getMessage());
+	    System.exit(-1);
 	}
     }
 }
