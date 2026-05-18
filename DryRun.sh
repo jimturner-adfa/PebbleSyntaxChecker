@@ -8,7 +8,7 @@ if [[ -z "$TERMUX_VERSION" ]]; then
     JAR="~/.local/lib/DryRun.jar"
 else
     PARAM="-Pandroid.aapt2FromMavenOverride=/data/data/com.itsaky.androidide/files/home/android-sdk/build-tools/35.0.0/aapt2 assembleDebug"
-    JAR="./DryRun.jar"
+    JAR="$(pwd)/DryRun.jar"
 fi
 echo *****Cloning $DIR into $CDIR
 rm -rf $CDIR
