@@ -4,10 +4,13 @@
 ## 🚀 Getting Started
 ### Prerequisites:
 Ensure your environment is configured with the following:
-
+#### Linux
 1. JDK 17 or higher
 2. Gradle 7.x+
-
+   
+#### CodeOnTheGo
+1. Current release
+   
 ### Environment Variables:
 
 1. JAVA_HOME: Points to your JDK installation.
