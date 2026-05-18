@@ -56,7 +56,7 @@ where:
 ### Implementation:
 
 The script will:
-1. Copy your tenplate directory into a new directory with the suffix .copy.
-2. Run the Pebble parser on the peb file in the copy
-3. Based on the value of language it will delete files not used (i.e. if the language is "java", the all kotlin files will be deleted)
-4. run gradle to build the template and verify the syntax
+1. Copy your template directory into a new directory with the suffix .copy.
+2. Run the Pebble parser on all files in the copy whose filenames end with .peb.
+3. Based on the value of language, it will delete files not needed. For example, if the choosen **language** is java, then all .kt files will be deleted.
+4. Verify the syntax by running a gradle build to create an apk from the template.
