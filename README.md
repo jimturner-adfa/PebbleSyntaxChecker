@@ -22,7 +22,7 @@ Clone the repository to your local machine:
 
 Bash
 ```
-git clone https://github.com/jimturner-adfa/PebbleSyntaxChecker.git
+git clone https://github.com/appdevforall/PebbleSyntaxChecker.git
 cd DryRun
 ```
 
@@ -40,7 +40,7 @@ fi
 ```
 
 ### Pebble Parser Settings
-This project is configured to use relative paths for template loading. Ensure your FileLoader prefix is correctly pointed to your resources directory:
+This project is configured to use relative paths for template loading. Ensure your FileLoader prefix is correctly pointed to your resources directory in the bash script and the Kotlin code
 
 ### 🛠 Usage
 
