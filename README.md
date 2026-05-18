@@ -3,7 +3,7 @@
 
 ## 🚀 Getting Started
 ### Prerequisites:
-Ensure your Ubuntu environment is configured with the following:
+Ensure your environment is configured with the following:
 
 1. JDK 17 or higher
 2. Gradle 7.x+
