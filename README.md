@@ -23,7 +23,7 @@ Clone the repository to your local machine:
 Bash
 ```
 git clone https://github.com/appdevforall/PebbleSyntaxChecker.git
-cd DryRun
+cd PebbleSyntaxChecker
 ```
 
 ### ⚙️ Configuration
