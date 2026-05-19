@@ -6,9 +6,11 @@ CDIR=${DIR%/}.copy
 if [[ -z "$TERMUX_VERSION" ]]; then
     PARAM=""
     JAR="~/.local/lib/DryRun.jar"
+    GRADLE="./gradlew"
 else
     PARAM="-Pandroid.aapt2FromMavenOverride=/data/data/com.itsaky.androidide/files/home/android-sdk/build-tools/35.0.0/aapt2 assembleDebug"
-    JAR="./DryRun.jar"
+    JAR="$(pwd)/DryRun.jar"
+    GRADLE="sh ./gradlew"
 fi
 echo *****Cloning $DIR into $CDIR
 rm -rf $CDIR
@@ -40,7 +42,7 @@ for file in "${my_files[@]}"; do
 done
 chmod a+x ./gradlew
 echo *****Building app in $CDIR
-./gradlew $PARAM assembleDebug
+$GRADLE $PARAM assembleDebug
 echo ********DONE**********
 popd
 
